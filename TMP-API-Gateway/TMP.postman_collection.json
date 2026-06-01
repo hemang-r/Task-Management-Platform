@@ -1,0 +1,678 @@
+{
+  "info": {
+    "_postman_id": "bf7fde0d-b409-44af-9008-22ce96c8fa45",
+    "name": "TMP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23997388"
+  },
+  "item": [
+    {
+      "name": "User Auth Service",
+      "item": [
+        {
+          "name": "User register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"hemangraninga@admin.com\",\r\n    \"password\" : \"Test@123\",\r\n    \"fullName\" : \"Hemang Raninga admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/tmp-userauth-service/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "tmp-userauth-service",
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData =pm.response.json();\r",
+                  "var token = jsonData.data.token;\r",
+                  "\r",
+                  "pm.collectionVariables.set(\"token\", token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"email\": \"hemangraninga@gmail.com\",\r\n//     \"password\" : \"Test@123\"\r\n// }\r\n\r\n{\r\n    \"email\": \"hemangraninga@admin.com\",\r\n    \"password\" : \"Test@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/tmp-userauth-service/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "tmp-userauth-service",
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User get own profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/tmp-userauth-service/api/v1/users/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "tmp-userauth-service",
+                "api",
+                "v1",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get user by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/tmp-userauth-service/api/v1/users/cc0c767d-ada1-43c9-86bf-918bfea5a1d4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "tmp-userauth-service",
+                "api",
+                "v1",
+                "users",
+                "cc0c767d-ada1-43c9-86bf-918bfea5a1d4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all users list(ADMIN only)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/tmp-userauth-service/api/v1/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "tmp-userauth-service",
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Task Management Service",
+      "item": [
+        {
+          "name": "Project",
+          "item": [
+            {
+              "name": "Create (Admin only)",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\" : \"Test project 2\",\r\n    \"discription\" : \"testing des\",\r\n    \"ownerUserId\" : \"cc0c767d-ada1-43c9-86bf-918bfea5a1d4\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get all projects",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get project by id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/0628911c-08d4-4729-b755-9f78b35f3ac9",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "0628911c-08d4-4729-b755-9f78b35f3ac9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update project (Admin only)",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\" : \"Test project\",\r\n    \"discription\" : \"testing des 1\",\r\n    \"ownerUserId\" : \"cc0c767d-ada1-43c9-86bf-918bfea5a1d4\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/0628911c-08d4-4729-b755-9f78b35f3ac9",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "0628911c-08d4-4729-b755-9f78b35f3ac9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete project(Admin only)",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/0628911c-08d4-4729-b755-9f78b35f3ac9",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "0628911c-08d4-4729-b755-9f78b35f3ac9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Testing controller",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\" : \"Test project\",\r\n    \"discription\" : \"testing des\",\r\n    \"ownerUserId\" : \"cc0c767d-ada1-43c9-86bf-918bfea5a1d4\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/test/task/get_test_string",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "test",
+                    "task",
+                    "get_test_string"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Task",
+          "item": [
+            {
+              "name": "Create task",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\" : \"test title 2\",\r\n    \"discription\" : \"des test\",\r\n    \"priority\" : \"HIGH\", //  LOW | MEDIUM | HIGH\r\n    \"assigneeUserId\" : \"cc0c767d-ada1-43c9-86bf-918bfea5a1d4\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/8f38319b-8263-4058-91ee-a7b85479fd4b/tasks",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "8f38319b-8263-4058-91ee-a7b85479fd4b",
+                    "tasks"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get all tasks",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/8f38319b-8263-4058-91ee-a7b85479fd4b/tasks",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "8f38319b-8263-4058-91ee-a7b85479fd4b",
+                    "tasks"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "IN_PROGRESS",
+                      "description": "TODO | IN_PROGRESS | DONE",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get task by id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/8f38319b-8263-4058-91ee-a7b85479fd4b/tasks/36c13e02-766a-47f9-983d-52162ad6d151",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "8f38319b-8263-4058-91ee-a7b85479fd4b",
+                    "tasks",
+                    "36c13e02-766a-47f9-983d-52162ad6d151"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update task",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\" : \"test title change\",\r\n    \"discription\" : \"des test\",\r\n    \"priority\" : \"HIGH\" //  LOW | MEDIUM | HIGH\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/8f38319b-8263-4058-91ee-a7b85479fd4b/tasks/36c13e02-766a-47f9-983d-52162ad6d151",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "8f38319b-8263-4058-91ee-a7b85479fd4b",
+                    "tasks",
+                    "36c13e02-766a-47f9-983d-52162ad6d151"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Assign task (Admin only)",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"assigneeUserId\" : \"cc0c767d-ada1-43c9-86bf-918bfea5a1d4\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/8f38319b-8263-4058-91ee-a7b85479fd4b/tasks/36c13e02-766a-47f9-983d-52162ad6d151/assign",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "8f38319b-8263-4058-91ee-a7b85479fd4b",
+                    "tasks",
+                    "36c13e02-766a-47f9-983d-52162ad6d151",
+                    "assign"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update task status",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"status\" : \"TODO\"  // TODO | IN_PROGRESS | DONE\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/8f38319b-8263-4058-91ee-a7b85479fd4b/tasks/9a171f2c-f976-4995-a247-056f74edfc28/status",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "8f38319b-8263-4058-91ee-a7b85479fd4b",
+                    "tasks",
+                    "9a171f2c-f976-4995-a247-056f74edfc28",
+                    "status"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete task (Admin only)",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"status\" : \"IN_PROGRESS\"  // TODO | IN_PROGRESS | DONE\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/8f38319b-8263-4058-91ee-a7b85479fd4b/tasks/36c13e02-766a-47f9-983d-52162ad6d151",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "8f38319b-8263-4058-91ee-a7b85479fd4b",
+                    "tasks",
+                    "36c13e02-766a-47f9-983d-52162ad6d151"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "My tasks",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"status\" : \"IN_PROGRESS\"  // TODO | IN_PROGRESS | DONE\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8083/tmp-taskmanagement-service/api/v1/projects/tasks/my-tasks",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8083",
+                  "path": [
+                    "tmp-taskmanagement-service",
+                    "api",
+                    "v1",
+                    "projects",
+                    "tasks",
+                    "my-tasks"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
