@@ -1,0 +1,3 @@
+SQL query 
+
+CREATE DATABASE taskdb;
